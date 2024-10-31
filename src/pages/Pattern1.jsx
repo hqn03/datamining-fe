@@ -19,6 +19,7 @@ function Pattern1() {
       const data_test = data.filter((item) =>
         moment(item.date_hour).isAfter("2024-10-09")
       );
+
       setDf3(data_test);
     });
 
@@ -27,8 +28,9 @@ function Pattern1() {
         const updated = moment(row.updated * 1000).format("DD/MM/YYYY");
         return { ...row, updated };
       });
-      console.log(aaaaa);
+
       setDf1(aaaaa);
+
       //   const datesUpdate = data.map((row) =>
       //     moment(row.updated * 1000).format("DD/MM/YYYY")
       //   );
@@ -57,25 +59,24 @@ function Pattern1() {
     // return () => clearInterval(interval);
   }, []);
   return (
-    <div className="p-6">
-      <div className="">
-        <select
-          value={selectValue.id}
-          onChange={(e) => {
-            const find = df1.find((i) => i.id === e.target.value);
-            setDataPie(keysPie.map((i) => find[i]));
-            setSelectValue(find);
-          }}
-        >
-          {df1
-            .filter((i) => i.ratings !== "0")
-            .map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.title}
-              </option>
-            ))}
-        </select>
-      </div>
+    <div className="p-10">
+      <select
+        className="border-2 rounded-md mb-2 border-black "
+        value={selectValue.id}
+        onChange={(e) => {
+          const find = df1.find((i) => i.id === e.target.value);
+          setDataPie(keysPie.map((i) => find[i]));
+          setSelectValue(find);
+        }}
+      >
+        {df1
+          .filter((i) => i.ratings !== "0")
+          .map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.title}
+            </option>
+          ))}
+      </select>
       <Chart
         value={dataPie}
         labels={keysPie}
@@ -92,13 +93,15 @@ function Pattern1() {
       />
 
       {/* Hinh3 */}
-      <Chart
-        data_x={df3.map((item) => item.date_hour)}
-        data_y={df3.map((item) => item.updated)}
-        type={"scatter"}
-        title={"Số lượng app update theo ngày"}
-        xaxis={{ tickmode: "linear" }}
-      />
+      <div className="">
+        <Chart
+          data_x={df3.map((item) => item.date_hour)}
+          data_y={df3.map((item) => item.updated)}
+          type={"scatter"}
+          title={"Số lượng app update theo ngày"}
+          xaxis={{ tickmode: "linear" }}
+        />
+      </div>
       {/* {df3 && (
         <Plot
           data={[

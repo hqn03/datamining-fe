@@ -1,4 +1,4 @@
-import { Routes, Route, Router, Link } from "react-router-dom";
+import { Routes, Route, Router, Link, NavLink } from "react-router-dom";
 import "./App.css";
 import Pattern1 from "./pages/Pattern1";
 
@@ -12,22 +12,24 @@ const links = [
 
 export default function App() {
   return (
-    <div className="grid grid-cols-6 h-screen">
-      <div className="col-span-1 bg-gray-800 text-white">
-        <div className="p-4 text-4xl text-center font-semibold">NO HOPE</div>
-        <div className="flex flex-col">
-          {links.map((link) => (
-            <Link
-              key={link.label}
-              to={link.to}
-              className="px-8 py-4 text-xl hover:bg-gray-100 hover:text-black"
-            >
-              {link.label}
-            </Link>
-          ))}
+    <div className="flex">
+      <div className="basis-60 bg-gray-900 text-white">
+        <div className="sticky top-0 left-0 h-screen">
+          <div className="py-4 text-4xl text-center font-semibold">LOGO</div>
+          <div className="flex flex-col">
+            {links.map((link) => (
+              <NavLink
+                key={link.label}
+                to={link.to}
+                className="px-2 py-4 rounded-md text-xl hover:bg-slate-700"
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="col-span-5">
+      <div className="flex-1">
         <Routes>
           <Route path="/dashboard" element={<h1>Dash board</h1>} />
           <Route path="/pattern1" element={<Pattern1 />} />
